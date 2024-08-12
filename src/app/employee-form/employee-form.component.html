@@ -1,0 +1,163 @@
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="EmpFormGroup" label="Employee Details">
+        <form [formGroup]="EmpFormGroup">
+            <div class="col-md-12">
+                <div class="row">
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Employee Name</mat-label>
+                        <input matInput formControlName="empName">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput formControlName="empEmailId">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Designation ID</mat-label>
+                        <input matInput formControlName="empDesignationId">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Contact No</mat-label>
+                        <input matInput formControlName="empContactNo">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Alternate Contact No</mat-label>
+                        <input matInput formControlName="empAltContactNo">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Personal Email ID</mat-label>
+                        <input matInput formControlName="empPersonalEmailId">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Total Experience (Years)</mat-label>
+                        <input matInput formControlName="empExpTotalYear">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Total Experience (Months)</mat-label>
+                        <input matInput formControlName="empExpTotalMonth">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="empCity">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>State</mat-label>
+                        <input matInput formControlName="empState">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Pin Code</mat-label>
+                        <input matInput formControlName="empPinCode">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="empAddress">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Permanent City</mat-label>
+                        <input matInput formControlName="empPerCity">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Permanent State</mat-label>
+                        <input matInput formControlName="empPerState">
+                    </mat-form-field>
+
+                    <mat-form-field  class="col-md-4">
+                        <mat-label>Permanent Pin Code</mat-label>
+                        <input matInput formControlName="empPerPinCode">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field  class="col-md-12">
+                        <mat-label>Permanent Address</mat-label>
+                        <input matInput formControlName="empPerAddress">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="EmpSkillFormGroup" label="Employee Skills">
+        <form [formGroup]="EmpSkillFormGroup">
+            <mat-form-field >
+                <mat-label>Employee ID</mat-label>
+                <input matInput formControlName="empId">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Skill</mat-label>
+                <input matInput formControlName="skill">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Total Years of Experience</mat-label>
+                <input matInput formControlName="totalYearExp">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Last Version Used</mat-label>
+                <input matInput formControlName="lastVersionUsed">
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="EmpExperienceFormGroup">
+        <form [formGroup]="EmpExperienceFormGroup">
+            <mat-form-field >
+                <mat-label>Employee ID</mat-label>
+                <input matInput formControlName="empId">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="companyName">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Start Date</mat-label>
+                <input matInput formControlName="startDate">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>End Date</mat-label>
+                <input matInput formControlName="endDate">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Designation</mat-label>
+                <input matInput formControlName="designation">
+            </mat-form-field>
+
+            <mat-form-field >
+                <mat-label>Projects Worked On</mat-label>
+                <input matInput formControlName="projectsWorkedOn">
+            </mat-form-field>
+        </form>
+        <ng-template matStepLabel>Employee Experience</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-stepper>
