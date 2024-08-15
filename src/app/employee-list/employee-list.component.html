@@ -1,36 +1,74 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="col-md-12">
+    <div class="row">
+        <div style="display: flex; justify-content: space-between;">
+            <mat-form-field appearance="outline" class="col-md-4">
+                <mat-label>Search</mat-label>
+                <input matInput #inputSearch>
+            </mat-form-field>
+            <button  class="col-md-2" mat-raised-button routerLink="/form">Add Employee</button>
+        </div>
+    </div>
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+        <!-- Position Column -->
+        <ng-container matColumnDef="empName">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.empName}} </td>
+        </ng-container>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="empName">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.empName}} </td>
-    </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="empDesignation">
+            <th mat-header-cell *matHeaderCellDef> Designation </th>
+            <td mat-cell *matCellDef="let element"> {{element.empDesignation}} </td>
+        </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="empDesignation">
-        <th mat-header-cell *matHeaderCellDef> Designation </th>
-        <td mat-cell *matCellDef="let element"> {{element.empDesignation}} </td>
-    </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+        </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef> Role </th>
-        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-    </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="empEmailId">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.empEmailId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef> Mobile </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="['/form',element.empId]">
+                        <mat-icon color="primary">edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteEmployee(element.empId)">
+                        <mat-icon color="primary">delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="empEmailId">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.empEmailId}} </td>
-    </ng-container>
-    <ng-container matColumnDef="mobile">
-        <th mat-header-cell *matHeaderCellDef> Mobile </th>
-        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr *matNoDataRow>
+            <td *ngIf="!isloading">
+                No data found for filter: {{inputSearch.value}}
+            </td>
+            <td colspan="6" *ngIf="isloading" align="center">
+                <mat-spinner class="my-5"></mat-spinner>
+            </td>
+        </tr>
+    </table>
+</div>
